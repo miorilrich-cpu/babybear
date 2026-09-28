@@ -64,10 +64,10 @@
 </head>
 <body id="home" class="bg-gradient-to-br from-pastelPink via-purple-50 to-pastelBlue min-h-screen flex justify-center items-center p-0 sm:p-6">
 
-    <!-- Welcome Overlay Popup -->
+    <!-- Welcome Overlay Popup (เปลี่ยนไอคอนเป็นรูปหมีตรงข้างบนข้อความ) -->
     <div id="welcomeOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-xs rounded-3xl p-6 cute-shadow text-center relative border-4 border-deepPink/50 animate-pulse-slow">
-            <div class="w-16 h-16 bg-cardPink rounded-full flex items-center justify-center mx-auto mb-3 text-accentPink shadow-inner overflow-hidden">
+            <div class="w-20 h-20 bg-cardPink rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-accentPink/30 shadow-inner overflow-hidden">
                 <img src="IMG_0736.jpeg" alt="Bear Icon" class="w-full h-full object-cover">
             </div>
             <h3 class="font-bold text-lg text-textPurple mb-1">Welcome To Babybear World</h3>
@@ -91,7 +91,7 @@
             <!-- Header -->
             <header class="px-5 pt-5 pb-3 flex items-center justify-between bg-pastelPink/80 sticky top-0 z-20 backdrop-blur-md border-b border-purple-100">
                 <div class="flex items-center space-x-3">
-                    <div class="w-14 h-14 bg-cardPink rounded-full flex items-center justify-center p-1 cute-shadow border-2 border-white overflow-hidden">
+                    <div class="w-14 h-14 bg-cardPink rounded-full flex items-center justify-center p-1 cute-shadow border-2 border-white overflow-hidden cursor-pointer hover:scale-105 transition" onclick="openFullscreen('IMG_0736.jpeg')">
                         <img src="IMG_0736.jpeg" alt="Babybear Studio Logo" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div>
@@ -121,13 +121,8 @@
 
             <!-- Banner Section -->
             <section class="px-5 my-4">
-                <div class="relative rounded-3xl overflow-hidden cute-shadow bg-gradient-to-r from-purple-100 via-pink-100 to-sky-100 border border-white banner-aspect">
-                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('แบนเนอร์ร้าน.png')"></div>
-                </div>
-                <div class="flex justify-center items-center space-x-1.5 mt-3">
-                    <span class="w-5 h-2 bg-accentPink rounded-full"></span>
-                    <span class="w-2 h-2 bg-deepPink/50 rounded-full"></span>
-                    <span class="w-2 h-2 bg-deepPink/50 rounded-full"></span>
+                <div class="relative rounded-3xl overflow-hidden cute-shadow bg-gradient-to-r from-purple-100 via-pink-100 to-sky-100 border border-white banner-aspect cursor-pointer group" onclick="openFullscreen('แบนเนอร์ร้าน.png')">
+                    <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition duration-300" style="background-image: url('แบนเนอร์ร้าน.png')"></div>
                 </div>
             </section>
 
@@ -139,27 +134,27 @@
                     </h3>
                 </div>
                 <div class="grid grid-cols-2 gap-3 mb-4">
-                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center">
-                        <img src="1.png" alt="Detail 1" class="w-full h-auto object-contain">
+                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center cursor-pointer group" onclick="openFullscreen('1.png')">
+                        <img src="1.png" alt="Detail 1" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center">
-                        <img src="IMG_6759.png" alt="Detail 2" class="w-full h-auto object-contain">
+                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center cursor-pointer group" onclick="openFullscreen('IMG_6759.png')">
+                        <img src="IMG_6759.png" alt="Detail 2" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center">
-                        <img src="3.jpeg" alt="Detail 3" class="w-full h-auto object-contain">
+                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center cursor-pointer group" onclick="openFullscreen('3.jpeg')">
+                        <img src="3.jpeg" alt="Detail 3" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center">
-                        <img src="4.jpeg" alt="Detail 4" class="w-full h-auto object-contain">
+                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center cursor-pointer group" onclick="openFullscreen('4.jpeg')">
+                        <img src="4.jpeg" alt="Detail 4" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
                 </div>
                 
-                <!-- ปุ่มรูปภาพ 2 ปุ่มด้านล่าง Details My Studio (ไม่มีกรอบหรือเงาใดๆ) -->
-                <div class="flex justify-center items-center gap-4 mt-3">
-                    <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="inline-block p-0 bg-transparent border-none shadow-none hover:opacity-90 transition">
-                        <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Button 1" class="w-32 h-auto block border-0 shadow-none bg-transparent">
+                <!-- ปุ่มรูปภาพ 2 ปุ่มด้านล่าง Details My Studio -->
+                <div class="grid grid-cols-2 gap-3 mt-3">
+                    <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
+                        <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Button 1" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
                     </a>
-                    <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="inline-block p-0 bg-transparent border-none shadow-none hover:opacity-90 transition">
-                        <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Button 2" class="w-32 h-auto block border-0 shadow-none bg-transparent">
+                    <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
+                        <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Button 2" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
                     </a>
                 </div>
             </section>
@@ -172,11 +167,11 @@
                     </h3>
                 </div>
                 <div class="grid grid-cols-2 gap-3 mb-4">
-                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center">
-                        <img src="5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg" alt="Portfolio 1" class="w-full h-auto object-contain">
+                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center cursor-pointer group" onclick="openFullscreen('5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg')">
+                        <img src="5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg" alt="Portfolio 1" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center">
-                        <img src="DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg" alt="Portfolio 2" class="w-full h-auto object-contain">
+                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow flex items-center justify-center cursor-pointer group" onclick="openFullscreen('DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg')">
+                        <img src="DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg" alt="Portfolio 2" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
                 </div>
 
@@ -188,20 +183,24 @@
                 </div>
             </section>
 
-            <!-- Game Top-up Rates (2 Images with Fullscreen Modal) -->
+            <!-- Game Top-up Rates (2 Images with Fullscreen Modal & Extra Text) -->
             <section id="topup" class="px-5 mt-6">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
                         <i data-lucide="coins" class="w-4 h-4 text-accentPink"></i> เรทราคารับเติมเกม
                     </h3>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer flex items-center justify-center" onclick="openFullscreen('IMG_9393.png')">
-                        <img src="IMG_9393.png" alt="TopUp Rate 1" class="w-full h-auto object-contain">
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer flex items-center justify-center group" onclick="openFullscreen('IMG_9393.png')">
+                        <img src="IMG_9393.png" alt="TopUp Rate 1" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer flex items-center justify-center" onclick="openFullscreen('1a2eddb343b89c68358c8777314ec0b2.jpeg')">
-                        <img src="1a2eddb343b89c68358c8777314ec0b2.jpeg" alt="TopUp Rate 2" class="w-full h-auto object-contain">
+                    <div class="bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer flex items-center justify-center group" onclick="openFullscreen('1a2eddb343b89c68358c8777314ec0b2.jpeg')">
+                        <img src="1a2eddb343b89c68358c8777314ec0b2.jpeg" alt="TopUp Rate 2" class="w-full h-auto object-contain group-hover:scale-105 transition duration-300">
                     </div>
+                </div>
+                <!-- ข้อความเพิ่มเติมใต้รูปเรทราคา -->
+                <div class="text-center bg-cardPink/40 py-2.5 px-4 rounded-2xl border border-purple-100">
+                    <p class="text-xs text-textPurple font-medium">และเกมอื่นๆอีกมากมาย สอบถามเค้าก่อนได้เยยนะค้าบ 🧸💜</p>
                 </div>
             </section>
 
@@ -263,7 +262,7 @@
 
     </div>
 
-    <!-- Fullscreen Image Modal (สำหรับดูรูปเรทเกมเต็มจอ พร้อมปุ่มกากบาท) -->
+    <!-- Fullscreen Image Modal (สำหรับดูรูปทุกรูปเต็มจอ พร้อมปุ่มกากบาท) -->
     <div id="fullscreenModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
         <div class="relative max-w-lg w-full max-h-[90vh] flex items-center justify-center">
             <button onclick="closeFullscreen()" class="absolute -top-10 right-0 text-white text-3xl font-bold bg-black/50 w-10 h-10 rounded-full flex items-center justify-center hover:bg-black transition">
