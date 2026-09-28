@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babybear Studio - รับทำป้าย ออกแบบกราฟิก และเติมเกม</title>
+    <title>Babybear Studio - รับออกแบบและเติมเกม</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font (Kanit / Prompt) -->
+    <!-- Google Font (Prompt) -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- FontAwesome Icons for backup -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -18,9 +18,10 @@
                 extend: {
                     colors: {
                         pastelPink: '#fcf2f8',
+                        pastelBlue: '#e0f2fe',
                         deepPink: '#d8b4fe',
                         accentPink: '#c084fc',
-                        textBrown: '#581c87',
+                        textPurple: '#581c87',
                         cardPink: '#f3e8ff'
                     },
                     fontFamily: {
@@ -45,7 +46,6 @@
         .banner-aspect {
             aspect-ratio: 1122 / 495;
         }
-        /* ซ่อน scrollbar แต่ยังเลื่อนได้ปกติ */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -53,116 +53,77 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-
-        /* ป๊อปอัพต้อนรับ */
-        #welcome-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(88, 28, 135, 0.4);
-            backdrop-filter: blur(4px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
-        .popup-content {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 10px 25px -5px rgba(192, 132, 252, 0.3);
-            max-width: 320px;
-            width: 90%;
-            border: 4px solid #f3e8ff;
-        }
-        .bear-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 15px auto;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23c084fc"><path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 7.6 7.9 8.6 8.5 9.4C6 10.5 4.5 13 4.5 16C4.5 19.5 7.5 22 12 22C16.5 22 19.5 19.5 19.5 16C19.5 13 18 10.5 15.5 9.4C16.1 8.6 16.5 7.6 16.5 6.5C16.5 4 14.5 2 12 2ZM8.5 6.5C8.5 4.8 9.8 3.5 11.5 3.5C13.2 3.5 14.5 4.8 14.5 6.5C14.5 7.5 13.9 8.4 13.1 8.8L12 9.5L10.9 8.8C10.1 8.4 9.5 7.5 9.5 6.5ZM12 20C8.5 20 6.5 18 6.5 16C6.5 13.5 9 11.5 12 11.5C15 11.5 17.5 13.5 17.5 16C17.5 18 15.5 20 12 20Z"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+        .animate-pulse-slow {
+            animation: pulse-slow 2s infinite ease-in-out;
         }
     </style>
 </head>
-<body id="home" class="bg-pastelPink min-h-screen flex justify-center items-center p-0 sm:p-6">
+<body id="home" class="bg-gradient-to-br from-pastelPink via-purple-50 to-pastelBlue min-h-screen flex justify-center items-center p-0 sm:p-6">
 
-    <!-- หน้าต่างป๊อปอัพต้อนรับก่อนเข้าเว็บ -->
-    <div id="welcome-popup">
-        <div class="popup-content">
-            <div class="bear-icon"></div>
-            <h2 class="font-bold text-lg text-textBrown mb-1">Welcome To Babybear World</h2>
-            <p class="text-xs text-textBrown/80 mb-5 leading-relaxed">ยินดีต้อนรับสู่เว็บไซต์ของกิ้บค้าบ</p>
-            <button onclick="enterWebsite()" class="w-full bg-accentPink text-white py-2.5 rounded-full text-xs font-semibold hover:bg-deepPink transition shadow-sm">เข้าสู่เว็บไซต์</button>
+    <!-- Welcome Overlay Popup (บังคับแตะ 1 ครั้งเพื่อปลดล็อคเสียงและเข้าเว็บ) -->
+    <div id="welcomeOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-xs rounded-3xl p-6 cute-shadow text-center relative border-4 border-deepPink/50 animate-pulse-slow">
+            <div class="w-16 h-16 bg-cardPink rounded-full flex items-center justify-center mx-auto mb-3 text-accentPink shadow-inner overflow-hidden">
+                <img src="IMG_0736.jpeg" alt="Bear Icon" class="w-full h-full object-cover">
+            </div>
+            <h3 class="font-bold text-lg text-textPurple mb-1">Welcome To Babybear World</h3>
+            <p class="text-xs text-textPurple/80 mb-5">ยินดีต้อนรับสู่เว็บไซต์ของกิ้บค้าบ</p>
+            <button onclick="startExperience()" class="w-full bg-gradient-to-r from-accentPink to-deepPink text-white py-3 rounded-2xl text-xs font-bold hover:opacity-90 transition shadow-md flex items-center justify-center gap-2">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> เข้าสู่เว็บไซต์
+            </button>
         </div>
     </div>
 
-    <!-- Background Music Audio Object -->
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+    <!-- YouTube Hidden Audio Player -->
+    <div id="youtube-audio-container" style="display:none;">
+        <iframe id="youtube-audio" src="https://www.youtube.com/embed/XtVpigGwgSE?enablejsapi=1&loop=1&playlist=XtVpigGwgSE" frameborder="0"></iframe>
+    </div>
 
-    <div class="w-full max-w-md bg-white sm:rounded-[40px] shadow-2xl overflow-hidden relative min-h-screen sm:min-h-[850px] flex flex-col justify-between border-0 sm:border-8 border-deepPink/40">
+    <div class="w-full max-w-md bg-white sm:rounded-[40px] shadow-2xl overflow-hidden relative min-h-screen sm:min-h-[900px] flex flex-col justify-between border-0 sm:border-8 border-deepPink/40">
         
         <!-- Main Scrollable Content Area -->
         <div class="overflow-y-auto no-scrollbar flex-1 pb-10">
             
-            <header class="px-5 pt-5 pb-3 flex items-center justify-between bg-pastelPink/50 sticky top-0 z-20 backdrop-blur-md">
+            <!-- Header -->
+            <header class="px-5 pt-5 pb-3 flex items-center justify-between bg-pastelPink/80 sticky top-0 z-20 backdrop-blur-md border-b border-purple-100">
                 <div class="flex items-center space-x-3">
                     <div class="w-14 h-14 bg-cardPink rounded-full flex items-center justify-center p-1 cute-shadow border-2 border-white overflow-hidden">
                         <img src="IMG_0736.jpeg" alt="Babybear Studio Logo" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold text-textBrown tracking-wide flex items-center gap-1.5">
+                        <h1 class="text-lg font-bold text-textPurple tracking-wide flex items-center gap-1">
                             Babybear Studio <i data-lucide="heart" class="w-4 h-4 fill-accentPink text-accentPink inline"></i>
                         </h1>
-                        <p class="text-xs text-textBrown/80 font-medium flex items-center gap-1">
-                            <i data-lucide="sparkles" class="w-3 h-3 text-accentPink"></i> Welcome To My Studio By Gibm <i data-lucide="sparkles" class="w-3 h-3 text-accentPink"></i>
+                        <p class="text-[11px] text-textPurple/80 font-medium flex items-center gap-1">
+                            <i data-lucide="sparkles" class="w-3 h-3 text-accentPink"></i> Welcome To My Studio By Gibm
                         </p>
                     </div>
                 </div>
-                <!-- Controls Area (Music Button & Menu Button) -->
+                
+                <!-- Music Player & Menu Buttons -->
                 <div class="flex items-center space-x-2">
-                    <!-- ปุ่มเล่นเพลงอัตโนมัติ (มุมบนขวา ข้างปุ่มเมนู) -->
-                    <button id="musicToggleBtn" onclick="toggleMusic()" class="h-10 px-3 bg-cardPink text-textBrown rounded-full flex items-center justify-center text-xs font-semibold shadow-sm hover:bg-accentPink hover:text-white transition gap-1">
-                        <i data-lucide="music" class="w-4 h-4"></i>
-                        <span id="musicText">เปิดเพลง</span>
+                    <button id="musicToggleBtn" onclick="toggleMusic()" title="เปิด/ปิดเพลง" class="w-10 h-10 bg-cardPink border border-purple-200 rounded-full flex items-center justify-center text-accentPink shadow-sm hover:scale-105 transition relative">
+                        <i id="musicIcon" class="fa-solid fa-volume-xmark text-base"></i>
+                        <span id="musicPulse" class="absolute -top-1 -right-1 hidden h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accentPink opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-accentPink"></span>
+                        </span>
                     </button>
-                    <!-- Menu Button -->
-                    <button onclick="toggleMenu()" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-textBrown shadow-sm hover:bg-cardPink transition">
+                    <button onclick="toggleMenu()" class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-textPurple shadow-sm hover:bg-cardPink transition">
                         <i data-lucide="menu" class="w-5 h-5"></i>
                     </button>
                 </div>
             </header>
 
-            <section class="px-5 my-3">
-                <!-- ส่วน Badges (ปุ่มกลมเล็กๆ ด้านบน) -->
-                <div class="flex items-center space-x-1.5 mb-2">
-                    <span class="w-3 h-3 bg-accentPink rounded-full inline-block"></span>
-                    <span class="w-3 h-3 bg-deepPink rounded-full inline-block"></span>
-                    <span class="w-3 h-3 bg-purple-300 rounded-full inline-block"></span>
-                    <span class="text-[11px] text-textBrown/70 font-medium ml-1">Babybear Studio System</span>
-                </div>
-
-                <!-- Status Bar (แถบเช็คคิวงาน) -->
-                <div class="bg-cardPink/80 border border-purple-200 px-3.5 py-2 rounded-2xl mb-3 flex items-center justify-between text-xs text-textBrown font-medium">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="clock" class="w-4 h-4 text-accentPink"></i>
-                        <span>สถานะคิวงาน: เปิดรับคิวปกติ 🌷</span>
-                    </div>
-                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                </div>
-
-                <!-- แบนเนอร์ -->
+            <!-- Banner Section -->
+            <section class="px-5 my-4">
                 <div class="relative rounded-3xl overflow-hidden cute-shadow bg-gradient-to-r from-purple-100 via-pink-100 to-sky-100 border border-white banner-aspect">
-                    <div class="absolute inset-0 opacity-100 bg-cover bg-center" style="background-image: url('แบนเนอร์ร้าน.png')"></div>
+                    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('แบนเนอร์ร้าน.png')"></div>
                 </div>
-                <!-- Slider / Carousel indicators -->
                 <div class="flex justify-center items-center space-x-1.5 mt-3">
                     <span class="w-5 h-2 bg-accentPink rounded-full"></span>
                     <span class="w-2 h-2 bg-deepPink/50 rounded-full"></span>
@@ -171,212 +132,224 @@
             </section>
 
             <!-- Services Section -->
-            <section id="services" class="px-5 mt-5 pt-4">
+            <section id="services" class="px-5 mt-4">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-bold text-textBrown text-base flex items-center gap-2">
-                        <i data-lucide="heart" class="w-4 h-4 fill-accentPink text-accentPink"></i> บริการของทางร้าน
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
+                        <i data-lucide="wand-2" class="w-4 h-4 text-accentPink"></i> บริการของทางร้าน
                     </h3>
-                    <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i>
                 </div>
                 <div class="grid grid-cols-3 gap-3">
-                    <!-- Service 1 -->
-                    <div onclick="openModal('ออกแบบป้าย', 'รับทำป้ายสินค้า ป้ายรีวิว ป้ายบัญชี เริ่มต้นคุ้มค่า ออกแบบไว ได้งานเร็ว งานสวยตรงใจ')" class="bg-cardPink/60 hover:bg-cardPink transition p-4 rounded-2xl text-center flex flex-col items-center justify-center border border-purple-200 cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-accentPink mb-2 group-hover:scale-110 transition shadow-sm">
-                            <i data-lucide="palette" class="w-6 h-6"></i>
+                    <div onclick="openModal('ออกแบบป้าย', 'รับออกแบบป้ายสินค้า ป้ายรีวิว และป้ายต่างๆ งานสวย ตรงใจ')" class="bg-cardPink/60 hover:bg-cardPink transition p-3 rounded-2xl text-center flex flex-col items-center justify-center border border-purple-200 cursor-pointer shadow-sm">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink mb-1.5 shadow-sm">
+                            <i data-lucide="palette" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-xs font-semibold text-textBrown">ออกแบบป้าย</span>
+                        <span class="text-xs font-semibold text-textPurple">ออกแบบป้าย</span>
                     </div>
-                    <!-- Service 2 -->
-                    <div onclick="openModal('ออกแบบบล็อก', 'รับทำบล็อกและองค์ประกอบตกแต่ง คมชัด สวยงาม น่ารักสุดๆ')" class="bg-cardPink/60 hover:bg-cardPink transition p-4 rounded-2xl text-center flex flex-col items-center justify-center border border-purple-200 cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-accentPink mb-2 group-hover:scale-110 transition shadow-sm">
-                            <i data-lucide="droplet" class="w-6 h-6"></i>
+                    <div onclick="openModal('ออกแบบบล็อก', 'รับออกแบบบล็อกสวยๆ ตกแต่งร้านและโซเชียลมีเดียให้โดดเด่น')" class="bg-cardPink/60 hover:bg-cardPink transition p-3 rounded-2xl text-center flex flex-col items-center justify-center border border-purple-200 cursor-pointer shadow-sm">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink mb-1.5 shadow-sm">
+                            <i data-lucide="layout-grid" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-xs font-semibold text-textBrown">ออกแบบบล็อก</span>
+                        <span class="text-xs font-semibold text-textPurple">ออกแบบบล็อก</span>
                     </div>
-                    <!-- Service 3 -->
-                    <div onclick="openModal('บริการรับเติมเกม', 'บริการเติมเกมปลอดภัย รวดเร็วทันใจ พร้อมให้บริการทุกเกมฮิต')" class="bg-cardPink/60 hover:bg-cardPink transition p-4 rounded-2xl text-center flex flex-col items-center justify-center border border-purple-200 cursor-pointer group shadow-sm">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-accentPink mb-2 group-hover:scale-110 transition shadow-sm">
-                            <i data-lucide="pen-tool" class="w-6 h-6"></i>
+                    <div onclick="openModal('บริการรับเติมเกม', 'บริการรับเติมเกมปลอดภัย รวดเร็วทันใจ ได้ของชัวร์')" class="bg-cardPink/60 hover:bg-cardPink transition p-3 rounded-2xl text-center flex flex-col items-center justify-center border border-purple-200 cursor-pointer shadow-sm">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink mb-1.5 shadow-sm">
+                            <i data-lucide="gamepad-2" class="w-5 h-5"></i>
                         </div>
-                        <span class="text-xs font-semibold text-textBrown">บริการรับเติมเกม</span>
+                        <span class="text-xs font-semibold text-textPurple">รับเติมเกม</span>
                     </div>
                 </div>
+            </section>
+
+            <!-- Details My Studio (4 Images) & Cartoon Link Buttons -->
+            <section id="details" class="px-5 mt-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i> Details My Studio
+                    </h3>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="aspect-square bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
+                        <img src="1.png" alt="Studio Detail 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
+                        <img src="IMG_6759.png" alt="Studio Detail 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
+                        <img src="3.jpeg" alt="Studio Detail 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="aspect-square bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
+                        <img src="4.jpeg" alt="Studio Detail 4" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <!-- ปุ่มรูปภาพลิงก์ Google Drive ข้างล่าง Details My Studio -->
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="block overflow-hidden transition hover:opacity-90">
+                        <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Cartoon Link 1" class="w-full h-auto object-cover">
+                    </a>
+                    <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block overflow-hidden transition hover:opacity-90">
+                        <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Cartoon Link 2" class="w-full h-auto object-cover">
+                    </a>
+                </div>
+                <!-- ปุ่มกลุ่มในเครือ BabyBear -->
+                <a href="https://drive.google.com/drive/folders/1WiI0eznBnrv4z5cPRe9cxPwqE7oizXLp" target="_blank" class="w-full bg-cardPink hover:bg-purple-200 border border-purple-200 text-textPurple font-semibold py-3 rounded-2xl text-xs flex items-center justify-center gap-2 transition shadow-sm">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i> กลุ่มในเครือ BabyBear <i data-lucide="arrow-right" class="w-4 h-4 text-accentPink"></i>
+                </a>
             </section>
 
             <!-- Portfolio Section -->
-            <section id="portfolio" class="px-5 mt-6 pt-4">
+            <section id="portfolio" class="px-5 mt-6">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-bold text-textBrown text-base flex items-center gap-2">
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
                         <i data-lucide="flower" class="w-4 h-4 text-accentPink"></i> ตัวอย่างผลงาน
+                    </h3>
+                    <button onclick="openAllPortfolio()" class="text-xs text-accentPink font-semibold hover:underline flex items-center gap-1">ดูทั้งหมด ></button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div onclick="openPortfolioDetail('ผลงานป้ายร้านสุดน่ารัก', '5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group">
+                        <div class="aspect-square w-full overflow-hidden bg-purple-50 relative">
+                            <img src="5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg" alt="Work 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                    </div>
+                    <div onclick="openPortfolioDetail('ผลงานบล็อกและป้ายร้าน', 'DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group">
+                        <div class="aspect-square w-full overflow-hidden bg-purple-50 relative">
+                            <img src="DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg" alt="Work 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Game Top-up Rates (2 Images) - ย้ายมาไว้ข้างล่างตัวอย่างผลงาน -->
+            <section id="topup" class="px-5 mt-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
+                        <i data-lucide="coins" class="w-4 h-4 text-accentPink"></i> เรทราคารับเติมเกม
                     </h3>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
-                    <!-- Portfolio Item 1 -->
-                    <div onclick="openPortfolioDetail('ผลงานป้ายสินค้าสุดน่ารัก', '5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 relative">
-                            <img src="5AEAB108-089C-44ED-9754-A071B0D2CB7A.jpeg" alt="Work 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] px-2 py-0.5 rounded-md font-medium text-textBrown shadow-xs flex items-center gap-1">
-                                <i data-lucide="heart" class="w-3 h-3 fill-accentPink text-accentPink"></i> น่ารักมาก
-                            </span>
-                        </div>
+                    <div class="aspect-[4/3] bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
+                        <img src="IMG_9393.png" alt="TopUp Rate 1" class="w-full h-full object-cover">
                     </div>
-                    <!-- Portfolio Item 2 -->
-                    <div onclick="openPortfolioDetail('ผลงานการ์ดและป้ายสุดพิเศษ', 'DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 relative">
-                            <img src="DB3FBB8F-F6A1-42DF-A5DC-3368B9064087.jpeg" alt="Work 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] px-2 py-0.5 rounded-md font-medium text-textBrown shadow-xs flex items-center gap-1">
-                                <i data-lucide="sparkles" class="w-3 h-3 text-accentPink"></i> Babybear
-                            </span>
-                        </div>
-                    </div>
-                    <!-- Portfolio Item 3 -->
-                    <div onclick="openPortfolioDetail('ผลงานการออกแบบสไตล์พาสเทล', '1.png')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 relative">
-                            <img src="1.png" alt="Work 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] px-2 py-0.5 rounded-md font-medium text-textBrown shadow-xs flex items-center gap-1">
-                                <i data-lucide="sun" class="w-3 h-3 text-accentPink"></i> Studio Work
-                            </span>
-                        </div>
-                    </div>
-                    <!-- Portfolio Item 4 -->
-                    <div onclick="openPortfolioDetail('ผลงานตกแต่งน่ารักๆ', 'IMG_6759.png')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 relative">
-                            <img src="IMG_6759.png" alt="Work 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-[10px] px-2 py-0.5 rounded-md font-medium text-textBrown shadow-xs flex items-center gap-1">
-                                <i data-lucide="smile" class="w-3 h-3 text-accentPink"></i> Cute Theme
-                            </span>
-                        </div>
+                    <div class="aspect-[4/3] bg-purple-50 rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
+                        <img src="1a2eddb343b89c68358c8777314ec0b2.jpeg" alt="TopUp Rate 2" class="w-full h-full object-cover">
                     </div>
                 </div>
             </section>
 
-            <!-- Details My Studio / Rates Section -->
-            <section id="rates" class="px-5 mt-6 pt-4">
+            <!-- Sign Price Rates Section -->
+            <section id="pricing" class="px-5 mt-6">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-bold text-textBrown text-base flex items-center gap-2">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i> เรทราคางานของทางร้าน
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
+                        <i data-lucide="tag" class="w-4 h-4 text-accentPink"></i> เรทราคางานของทางร้าน
                     </h3>
                 </div>
-                
-                <!-- รูปประกอบเรทราคา 4 รูป -->
-                <div class="grid grid-cols-2 gap-3 mb-4">
-                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
-                        <img src="1.png" alt="Detail 1" class="w-full h-full object-cover">
+                <div class="bg-cardPink/50 p-4 rounded-3xl border border-purple-100 space-y-2.5">
+                    <p class="text-[11px] text-textPurple/80 text-center mb-2 font-medium">งานป้ายราคาจะต่างแต่ละแนวและ ราคาต่างกันตามเรทด้วยนะค้าบ ✨</p>
+                    
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวมืด</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
                     </div>
-                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
-                        <img src="IMG_6759.png" alt="Detail 2" class="w-full h-full object-cover">
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวมีใจ</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
                     </div>
-                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
-                        <img src="3.jpeg" alt="Detail 3" class="w-full h-full object-cover">
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวกระดาน</span>
+                        <span class="font-bold text-accentPink">Start 69฿+</span>
                     </div>
-                    <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow">
-                        <img src="4.jpeg" alt="Detail 4" class="w-full h-full object-cover">
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวเจ้าหญิง</span>
+                        <span class="font-bold text-accentPink">Start 59฿+</span>
                     </div>
-                </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวน่ารักปกติ</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวทางการ</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวเกม</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
 
-                <!-- ปุ่มรูปภาพลิงก์ Google Drive ด้านล่าง Details My Studio -->
-                <div class="flex justify-center items-center gap-4 mb-4">
-                    <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="block transition hover:opacity-90">
-                        <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Drive Link 1" class="w-28 h-auto object-contain">
-                    </a>
-                    <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block transition hover:opacity-90">
-                        <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Drive Link 2" class="w-28 h-auto object-contain">
-                    </a>
-                </div>
-
-                <!-- รายละเอียดราคาป้าย -->
-                <div class="bg-cardPink/60 p-4 rounded-3xl border border-purple-200 text-xs text-textBrown space-y-2 mb-4">
-                    <p class="font-bold text-sm text-textBrown mb-1">งานป้ายราคาจะต่างแต่ละแนวและ ราคาต่างกันตามเรทด้วยนะค้าบ</p>
-                    <div class="grid grid-cols-1 gap-1.5">
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวมืด</span><span class="font-semibold">Start 99฿+</span></div>
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวมีใจ</span><span class="font-semibold">Start 99฿+</span></div>
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวกระดาน</span><span class="font-semibold">Start 69฿+</span></div>
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวเจ้าหญิง</span><span class="font-semibold">Start 59฿+</span></div>
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวน่ารักปกติ</span><span class="font-semibold">Start 99฿+</span></div>
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวทางการ</span><span class="font-semibold">Start 99฿+</span></div>
-                        <div class="flex justify-between border-b border-purple-200/60 pb-1"><span>แนวเกม</span><span class="font-semibold">Start 99฿+</span></div>
-                    </div>
-                    <p class="mt-2 text-textBrown/90">นอกเหนือจากนี้สอบถามได้เลยนะคะ<br>พร้อมให้บริการทุกระดับประทับใจค่ะ</p>
-                </div>
-
-                <!-- เรทราคารับเติมเกม -->
-                <div class="bg-cardPink/40 p-4 rounded-3xl border border-purple-100">
-                    <h4 class="font-bold text-textBrown text-sm mb-3 flex items-center gap-1.5">
-                        <i data-lucide="heart" class="w-4 h-4 text-accentPink"></i> เรทราคารับเติมเกม
-                    </h4>
-                    <div class="grid grid-cols-2 gap-3 mb-3">
-                        <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow aspect-square">
-                            <img src="IMG_9393.png" alt="Game Topup 1" class="w-full h-full object-cover">
-                        </div>
-                        <div class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow aspect-square">
-                            <img src="1a2eddb343b89c68358c8777314ec0b2.jpeg" alt="Game Topup 2" class="w-full h-full object-cover">
-                        </div>
-                    </div>
+                    <p class="text-[11px] text-textPurple text-center pt-2 font-medium">นอกเหนือจากนี้สอบถามได้เลยนะคะ<br>พร้อมให้บริการทุกระดับประทับใจค่ะ 💖</p>
                 </div>
             </section>
 
-            <!-- Contact Section (White Background Social Icons) -->
-            <section id="contact" class="px-5 mt-6 pt-4">
+            <!-- Contact Section -->
+            <section id="contact" class="px-5 mt-6">
                 <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-bold text-textBrown text-base flex items-center gap-2">
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
                         <i data-lucide="message-circle" class="w-4 h-4 text-accentPink"></i> ช่องทางการติดต่อ
                     </h3>
-                    <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i>
                 </div>
-                <div class="grid grid-cols-3 gap-3 bg-cardPink/40 p-4 rounded-3xl border border-purple-100 mb-3">
-                    <!-- Facebook -->
-                    <a href="https://facebook.com" target="_blank" class="flex flex-col items-center group">
-                        <div class="w-12 h-12 bg-white border-2 border-purple-200 rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-110 group-hover:bg-cardPink transition">
-                            <i class="fa-brands fa-facebook-f text-base text-accentPink"></i>
+                <div class="space-y-2.5">
+                    <a href="https://facebook.com" target="_blank" class="bg-cardPink/60 hover:bg-cardPink p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between transition group shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-105 transition">
+                                <i class="fa-brands fa-facebook-f text-base"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-textPurple">Facebook</p>
+                                <p class="text-[11px] text-textPurple/80">Gibm ( Babybear )</p>
+                            </div>
                         </div>
-                        <span class="text-[11px] font-semibold text-textBrown mt-2">Facebook</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-accentPink"></i>
                     </a>
-                    <!-- Line -->
-                    <a href="https://line.me" target="_blank" class="flex flex-col items-center group">
-                        <div class="w-12 h-12 bg-white border-2 border-purple-200 rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-110 group-hover:bg-cardPink transition">
-                            <i class="fa-brands fa-line text-lg text-accentPink"></i>
+                    <a href="https://line.me" target="_blank" class="bg-cardPink/60 hover:bg-cardPink p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between transition group shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-105 transition">
+                                <i class="fa-brands fa-line text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-textPurple">Line</p>
+                                <p class="text-[11px] text-textPurple/80">gibmbear</p>
+                            </div>
                         </div>
-                        <span class="text-[11px] font-semibold text-textBrown mt-2">Line</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-accentPink"></i>
                     </a>
-                    <!-- Discord -->
-                    <a href="https://discord.gg/R4jEQCgZeQ" target="_blank" class="flex flex-col items-center group">
-                        <div class="w-12 h-12 bg-white border-2 border-purple-200 rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-110 group-hover:bg-cardPink transition">
-                            <i class="fa-brands fa-discord text-base text-accentPink"></i>
+                    <a href="https://discord.gg/R4jEQCgZeQ" target="_blank" class="bg-cardPink/60 hover:bg-cardPink p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between transition group shadow-sm">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-105 transition">
+                                <i class="fa-brands fa-discord text-base"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-textPurple">Discord ร้าน</p>
+                                <p class="text-[11px] text-textPurple/80">คลิกเพื่อเข้าสู่ดิสคอร์ด</p>
+                            </div>
                         </div>
-                        <span class="text-[11px] font-semibold text-textBrown mt-2">Discord</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-accentPink"></i>
                     </a>
-                </div>
-                <div class="bg-cardPink/60 p-3 rounded-2xl text-center text-xs text-textBrown space-y-1">
-                    <p><strong>Facebook :</strong> Gibm ( Babybear )</p>
-                    <p><strong>Line :</strong> gibmbear</p>
-                    <p><strong>Discord ร้าน :</strong> <a href="https://discord.gg/R4jEQCgZeQ" target="_blank" class="text-accentPink underline">https://discord.gg/R4jEQCgZeQ</a></p>
                 </div>
             </section>
         </div>
 
+        <!-- Footer -->
         <footer class="bg-deepPink/30 pt-4 pb-3 px-5 text-center relative z-10 border-t border-deepPink/20">
-            <div class="flex items-center justify-center space-x-1.5 text-xs text-textBrown font-medium">
+            <div class="flex items-center justify-center space-x-1.5 text-xs text-textPurple font-medium">
                 <i data-lucide="heart" class="w-3.5 h-3.5 fill-accentPink text-accentPink"></i>
                 <span>BABYBEAR STUDIO</span>
                 <i data-lucide="heart" class="w-3.5 h-3.5 fill-accentPink text-accentPink"></i>
             </div>
-            <p class="text-[10px] text-textBrown/70 mt-0.5">© 2026 All Rights Reserved</p>
+            <p class="text-[10px] text-textPurple/70 mt-0.5">© 2026 All Rights Reserved</p>
         </footer>
 
     </div>
 
-    <!-- Custom Interactive Modal -->
+    <!-- Modals -->
     <div id="infoModal" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-xs rounded-3xl p-6 cute-shadow text-center relative animate-fade-in">
+        <div class="bg-white w-full max-w-xs rounded-3xl p-6 cute-shadow text-center relative">
             <div class="w-12 h-12 bg-cardPink rounded-full flex items-center justify-center mx-auto mb-3 text-accentPink">
                 <i data-lucide="sparkles" class="w-6 h-6"></i>
             </div>
-            <h3 id="modalTitle" class="font-bold text-lg text-textBrown mb-2">หัวข้อบริการ</h3>
-            <p id="modalDesc" class="text-xs text-textBrown/80 mb-5 leading-relaxed">รายละเอียดบริการต่างๆ ของ Babybear Studio</p>
+            <h3 id="modalTitle" class="font-bold text-lg text-textPurple mb-2">หัวข้อบริการ</h3>
+            <p id="modalDesc" class="text-xs text-textPurple/80 mb-5 leading-relaxed">รายละเอียดบริการต่างๆ</p>
             <div class="flex space-x-2">
-                <button onclick="closeModal()" class="flex-1 bg-gray-100 text-textBrown py-2.5 rounded-full text-xs font-semibold hover:bg-gray-200 transition">ปิด</button>
+                <button onclick="closeModal()" class="flex-1 bg-gray-100 text-textPurple py-2.5 rounded-full text-xs font-semibold hover:bg-gray-200 transition">ปิด</button>
                 <a href="https://line.me" target="_blank" class="flex-1 bg-accentPink text-white py-2.5 rounded-full text-xs font-semibold hover:bg-deepPink transition shadow-sm flex items-center justify-center gap-1">
-                    <i class="fa-brands fa-line"></i> สนใจสั่งทำ
+                    <i class="fa-brands fa-line"></i> สนใจติดต่อ
                 </a>
             </div>
         </div>
@@ -388,83 +361,116 @@
             <div class="aspect-square w-full overflow-hidden rounded-2xl mb-3 shadow-sm">
                 <img id="portfolioImg" src="" alt="Portfolio Large" class="w-full h-full object-cover">
             </div>
-            <h3 id="portfolioTitle" class="font-bold text-base text-textBrown mb-1">ผลงาน</h3>
-            <p class="text-xs text-textBrown/70 mb-4">สนใจงานสไตล์นี้ทักแชทสอบถามคิวได้เลยนะคะ</p>
+            <h3 id="portfolioTitle" class="font-bold text-base text-textPurple mb-1">ผลงาน</h3>
+            <p class="text-xs text-textPurple/70 mb-4">สนใจงานสไตล์นี้ทักแชทสอบถามคิวได้เลยนะคะ</p>
             <button onclick="closePortfolioDetail()" class="w-full bg-accentPink text-white py-2.5 rounded-full text-xs font-semibold hover:bg-deepPink transition shadow-sm">ปิดหน้าต่าง</button>
         </div>
     </div>
 
     <!-- Menu Drawer -->
     <div id="menuDrawer" class="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 hidden flex justify-end">
-        <div class="bg-white w-72 h-full p-6 shadow-2xl flex flex-col justify-between animate-slide-left">
+        <div class="bg-white w-72 h-full p-6 shadow-2xl flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center space-x-2">
                         <i data-lucide="sparkles" class="w-5 h-5 text-accentPink"></i>
-                        <span class="font-bold text-textBrown">Babybear Studio</span>
+                        <span class="font-bold text-textPurple">Babybear Studio</span>
                     </div>
-                    <button onclick="toggleMenu()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-textBrown">
+                    <button onclick="toggleMenu()" class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-textPurple">
                         <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
                 <nav class="space-y-4">
-                    <a href="#home" onclick="toggleMenu()" class="flex items-center space-x-3 text-textBrown font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#home" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="home" class="w-4 h-4 text-accentPink"></i> หน้าแรก
                     </a>
-                    <a href="#services" onclick="toggleMenu()" class="flex items-center space-x-3 text-textBrown font-medium p-2 hover:bg-cardPink rounded-xl transition">
-                        <i data-lucide="wand-2" class="w-4 h-4 text-accentPink"></i> บริการของเรา
+                    <a href="#services" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                        <i data-lucide="wand-2" class="w-4 h-4 text-accentPink"></i> บริการของทางร้าน
                     </a>
-                    <a href="#portfolio" onclick="toggleMenu()" class="flex items-center space-x-3 text-textBrown font-medium p-2 hover:bg-cardPink rounded-xl transition">
-                        <i data-lucide="star" class="w-4 h-4 text-accentPink"></i> ตัวอย่างผลงาน
+                    <a href="#topup" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                        <i data-lucide="coins" class="w-4 h-4 text-accentPink"></i> เรทรับเติมเกม
                     </a>
-                    <a href="#rates" onclick="toggleMenu()" class="flex items-center space-x-3 text-textBrown font-medium p-2 hover:bg-cardPink rounded-xl transition">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i> เรทราคา
+                    <a href="#pricing" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                        <i data-lucide="tag" class="w-4 h-4 text-accentPink"></i> เรทราคางาน
                     </a>
-                    <a href="#contact" onclick="toggleMenu()" class="flex items-center space-x-3 text-textBrown font-medium p-2 hover:bg-cardPink rounded-xl transition">
-                        <i data-lucide="message-square" class="w-4 h-4 text-accentPink"></i> ติดต่อเรา
+                    <a href="#contact" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                        <i data-lucide="message-circle" class="w-4 h-4 text-accentPink"></i> ช่องทางการติดต่อ
                     </a>
                 </nav>
             </div>
             <div class="bg-cardPink p-4 rounded-2xl text-center">
-                <p class="text-xs font-semibold text-textBrown">เปิดรับคิวอยู่น้า 🌷</p>
-                <p class="text-[10px] text-textBrown/80 mt-1">สอบถามคิวงานก่อนได้เลยค่า</p>
+                <p class="text-xs font-semibold text-textPurple">เปิดรับคิวอยู่น้า 🌷</p>
+                <p class="text-[10px] text-textPurple/80 mt-1">สอบถามคิวงานก่อนได้เลยค่า</p>
             </div>
         </div>
     </div>
 
+    <!-- YouTube IFrame API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
 
-        const audio = document.getElementById('bg-music');
-        const musicText = document.getElementById('musicText');
+        let player;
         let isPlaying = false;
+        const musicToggleBtn = document.getElementById('musicToggleBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicPulse = document.getElementById('musicPulse');
 
-        function enterWebsite() {
-            const popup = document.getElementById('welcome-popup');
-            popup.style.display = 'none';
-            
-            // เล่นเพลงอัตโนมัติเมื่อกดเข้าเว็บไซต์
-            audio.play().then(() => {
-                isPlaying = true;
-                musicText.innerText = 'หยุดเพลง';
-            }).catch(error => {
-                console.log("Autoplay blocked:", error);
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-audio', {
+                height: '0',
+                width: '0',
+                videoId: 'XtVpigGwgSE',
+                playerVars: {
+                    'autoplay': 0,
+                    'loop': 1,
+                    'playlist': 'XtVpigGwgSE',
+                    'controls': 0
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
             });
         }
 
+        function onPlayerReady(event) {
+            player.setVolume(50);
+        }
+
+        // ฟังก์ชันเมื่อลูกค้ากดปุ่มต้อนรับ (ช่วยปลดล็อคเสียงและเล่นเพลงทันทีตามกฎบราวเซอร์)
+        function startExperience() {
+            const overlay = document.getElementById('welcomeOverlay');
+            overlay.style.display = 'none';
+
+            if (player) {
+                player.playVideo();
+                isPlaying = true;
+                updateMusicUI();
+            }
+        }
+
         function toggleMusic() {
+            if (!player) return;
+            
             if (isPlaying) {
-                audio.pause();
+                player.pauseVideo();
                 isPlaying = false;
-                musicText.innerText = 'เปิดเพลง';
             } else {
-                audio.play().then(() => {
-                    isPlaying = true;
-                    musicText.innerText = 'หยุดเพลง';
-                }).catch(err => {
-                    console.log("Play error:", err);
-                });
+                player.playVideo();
+                isPlaying = true;
+            }
+            updateMusicUI();
+        }
+
+        function updateMusicUI() {
+            if (isPlaying) {
+                musicToggleBtn.classList.add('animate-pulse-slow');
+                musicPulse.style.display = 'flex';
+                musicIcon.className = "fa-solid fa-volume-high text-base";
+            } else {
+                musicToggleBtn.classList.remove('animate-pulse-slow');
+                musicPulse.style.display = 'none';
+                musicIcon.className = "fa-solid fa-volume-xmark text-base";
             }
         }
 
@@ -486,6 +492,10 @@
 
         function closePortfolioDetail() {
             document.getElementById('portfolioModal').classList.add('hidden');
+        }
+
+        function openAllPortfolio() {
+            openModal('ตัวอย่างผลงานทั้งหมด', 'Babybear Studio มีผลงานออกแบบป้ายและกราฟิกน่ารักๆ ให้เลือกชมมากกว่า 500+ แบบ สามารถทักดูอัลบั้มเพิ่มเติมได้ทาง LINE หรือ Instagram ค่ะ');
         }
 
         function toggleMenu() {
