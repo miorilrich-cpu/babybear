@@ -151,15 +151,15 @@
                 <!-- ปุ่มรูปภาพ 2 ปุ่มด้านล่าง Details My Studio พร้อมหัวข้อข้อความ -->
                 <div class="grid grid-cols-2 gap-3 mt-3">
                     <div class="text-center flex flex-col">
-                        <p class="text-xs font-semibold text-textPurple mb-1">✨กดดูตัวอย่างตรงนี้ค้าบ🧸💜</p>
+                        <p class="text-xs font-semibold text-textPurple mb-1">กดดูตัวอย่างตรงนี้ค้าบ</p>
                         <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
                             <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Button 1" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
                         </a>
                     </div>
                     <div class="text-center flex flex-col">
-                        <p class="text-xs font-semibold text-textPurple mb-1">✨กดเลือกตูนตรงนี้ค้าบ🧸💜</p>
+                        <p class="text-xs font-semibold text-textPurple mb-1">กดเลือกตูนตรงนี้ค้าบ</p>
                         <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
-                            <img src="ไม่มีชื่อ 2676_20260929025643.png" alt="Button 2" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
+                            <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Button 2" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
                         </a>
                     </div>
                 </div>
@@ -368,6 +368,16 @@
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         lucide.createIcons();
+
+        // บังคับเคลียร์ตำแหน่ง scroll ให้กลับมาด้านบนสุดทันทีที่โหลดเว็บ
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+            const homeDiv = document.getElementById('home');
+            if (homeDiv) homeDiv.scrollTop = 0;
+            if (window.location.hash) {
+                history.replaceState(null, null, window.location.pathname);
+            }
+        });
 
         let player;
         let isPlaying = false;
