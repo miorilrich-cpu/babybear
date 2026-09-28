@@ -337,22 +337,22 @@
                     </button>
                 </div>
                 <nav class="space-y-4">
-                    <a href="#home" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#home" onclick="scrollToSection('home', event)" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="home" class="w-4 h-4 text-accentPink"></i> หน้าแรก
                     </a>
-                    <a href="#details" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#details" onclick="scrollToSection('details', event)" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i> Details My Studio
                     </a>
-                    <a href="#pricing" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#pricing" onclick="scrollToSection('pricing', event)" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="tag" class="w-4 h-4 text-accentPink"></i> เรทราคางาน
                     </a>
-                    <a href="#portfolio" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#portfolio" onclick="scrollToSection('portfolio', event)" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="flower" class="w-4 h-4 text-accentPink"></i> ตัวอย่างผลงาน
                     </a>
-                    <a href="#topup" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#topup" onclick="scrollToSection('topup', event)" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="coins" class="w-4 h-4 text-accentPink"></i> เรทรับเติมเกม
                     </a>
-                    <a href="#contact" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                    <a href="#contact" onclick="scrollToSection('contact', event)" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="message-circle" class="w-4 h-4 text-accentPink"></i> ช่องทางการติดต่อ
                     </a>
                 </nav>
@@ -378,6 +378,24 @@
                 history.replaceState(null, null, window.location.pathname);
             }
         });
+
+        // ฟังก์ชันบังคับเลื่อนภายในกล่องเนื้อหาหลักอย่างแม่นยำ
+        function scrollToSection(targetId, event) {
+            event.preventDefault();
+            toggleMenu(); // ปิดเมนูก่อน
+            
+            const homeContainer = document.getElementById('home');
+            const targetElement = document.getElementById(targetId);
+            
+            if (homeContainer && targetElement) {
+                // คำนวณตำแหน่งเพื่อให้หัวข้อขึ้นมาอยู่ด้านบนสุดพอดี
+                const topPos = targetElement.offsetTop - homeContainer.offsetTop;
+                homeContainer.scrollTo({
+                    top: topPos,
+                    behavior: 'smooth'
+                });
+            }
+        }
 
         let player;
         let isPlaying = false;
