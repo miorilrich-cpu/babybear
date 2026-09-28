@@ -64,11 +64,11 @@
 </head>
 <body id="home" class="bg-gradient-to-br from-pastelPink via-purple-50 to-pastelBlue min-h-screen flex justify-center items-center p-0 sm:p-6">
 
-    <!-- Welcome Overlay Popup (เปลี่ยนรูปเป็นไอคอนหมีน่ารักๆ แทน) -->
+    <!-- Welcome Overlay Popup -->
     <div id="welcomeOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-xs rounded-3xl p-6 cute-shadow text-center relative border-4 border-deepPink/50 animate-pulse-slow">
             <div class="w-20 h-20 bg-cardPink rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-accentPink/30 shadow-inner text-accentPink">
-                <i class="fa-solid fa-face-bear text-4xl"></i>
+                <i data-lucide="heart" class="w-10 h-10 fill-accentPink text-accentPink"></i>
             </div>
             <h3 class="font-bold text-lg text-textPurple mb-1">Welcome To Babybear World</h3>
             <p class="text-xs text-textPurple/80 mb-5">ยินดีต้อนรับสู่เว็บไซต์ของกิ้บค้าบ</p>
@@ -148,14 +148,20 @@
                     </div>
                 </div>
                 
-                <!-- ปุ่มรูปภาพ 2 ปุ่มด้านล่าง Details My Studio -->
+                <!-- ปุ่มรูปภาพ 2 ปุ่มด้านล่าง Details My Studio พร้อมข้อความใต้ปุ่ม -->
                 <div class="grid grid-cols-2 gap-3 mt-3">
-                    <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
-                        <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Button 1" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
-                    </a>
-                    <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
-                        <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Button 2" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
-                    </a>
+                    <div>
+                        <a href="https://drive.google.com/drive/folders/10q-1ihztpgSOsQrb0DyzrBdAOdnzuIy1" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
+                            <img src="386f4ee5bfd5b16e7252a78c395aea2c.jpeg" alt="Button 1" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
+                        </a>
+                        <p class="text-[11px] text-textPurple text-center mt-1.5 font-medium">ตัวอย่างงานร้านกิ้บ</p>
+                    </div>
+                    <div>
+                        <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
+                            <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Button 2" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
+                        </a>
+                        <p class="text-[11px] text-textPurple text-center mt-1.5 font-medium">เลือกตูนตรงนี้</p>
+                    </div>
                 </div>
             </section>
 
@@ -255,9 +261,9 @@
                     </h3>
                 </div>
                 <div class="space-y-2.5">
-                    <div class="bg-cardPink/60 p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between shadow-sm">
+                    <a href="https://www.facebook.com/gibmbabybear?" target="_blank" class="bg-cardPink/60 hover:bg-cardPink p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between transition group shadow-sm">
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-105 transition">
                                 <i class="fa-brands fa-facebook-f text-base"></i>
                             </div>
                             <div>
@@ -265,10 +271,11 @@
                                 <p class="text-[11px] text-textPurple/80">Gibm ( Babybear )</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="bg-cardPink/60 p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between shadow-sm">
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-accentPink"></i>
+                    </a>
+                    <a href="https://line.me/ti/p/W3enjxf2XL" target="_blank" class="bg-cardPink/60 hover:bg-cardPink p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between transition group shadow-sm">
                         <div class="flex items-center space-x-3">
-                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm">
+                            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-105 transition">
                                 <i class="fa-brands fa-line text-lg"></i>
                             </div>
                             <div>
@@ -276,7 +283,8 @@
                                 <p class="text-[11px] text-textPurple/80">gibmbear</p>
                             </div>
                         </div>
-                    </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-accentPink"></i>
+                    </a>
                     <a href="https://discord.gg/R4jEQCgZeQ" target="_blank" class="bg-cardPink/60 hover:bg-cardPink p-3.5 rounded-2xl border border-purple-200 flex items-center justify-between transition group shadow-sm">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-accentPink shadow-sm group-hover:scale-105 transition">
