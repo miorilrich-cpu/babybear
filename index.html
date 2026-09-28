@@ -187,7 +187,7 @@
                 </div>
             </section>
 
-            <!-- Portfolio Section (ครบ 4 ช่องตามเดิม) -->
+            <!-- Portfolio Section (ปรับทรงใหม่ตามที่คุณต้องการ) -->
             <section id="portfolio" class="px-5 mt-6">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
@@ -196,33 +196,40 @@
                     <span class="text-xs text-textPurple/70 font-medium">ดูทั้งหมด ></span>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
-                    <!-- ช่องที่ 1: น่ารักมาก -->
-                    <div onclick="openPortfolioDetail('ผลงานป้ายน่ารักมาก', 'https://placehold.co/320x320/f3e8ff/c084fc?text=Cute+Sign+1')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group p-2 text-center">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 rounded-xl relative mb-2">
-                            <img src="https://placehold.co/320x320/f3e8ff/c084fc?text=Cute+Sign+1" alt="Cute Sign 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <!-- การ์ดที่ 1: Cute Sign 1 -->
+                    <div onclick="openPortfolioDetail('ผลงานป้าย Cute Sign 1', 'https://placehold.co/320x320/f3e8ff/c084fc?text=Cute+Sign+1')" class="bg-white rounded-3xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group relative aspect-square">
+                        <img src="https://placehold.co/320x320/f3e8ff/c084fc?text=Cute+Sign+1" alt="Cute Sign 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-purple-100 flex items-center gap-1.5">
+                            <span class="text-accentPink text-xs">💜</span>
+                            <span class="text-textPurple text-[11px] font-bold">น่ารักมาก</span>
                         </div>
-                        <span class="inline-block bg-cardPink text-textPurple text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-purple-200">💖 น่ารักมาก</span>
                     </div>
-                    <!-- ช่องที่ 2: Thank You -->
-                    <div onclick="openPortfolioDetail('ผลงานป้าย Thank You', 'https://placehold.co/320x320/fcf2f8/c084fc?text=Thank+You')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group p-2 text-center">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 rounded-xl relative mb-2">
-                            <img src="https://placehold.co/320x320/fcf2f8/c084fc?text=Thank+You" alt="Thank You" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+
+                    <!-- การ์ดที่ 2: Thank You -->
+                    <div onclick="openPortfolioDetail('ผลงานป้าย Thank You', 'https://placehold.co/320x320/fcf2f8/c084fc?text=Thank+You')" class="bg-white rounded-3xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group relative aspect-square">
+                        <img src="https://placehold.co/320x320/fcf2f8/c084fc?text=Thank+You" alt="Thank You" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-purple-100 flex items-center gap-1.5">
+                            <span class="text-accentPink text-xs">✨</span>
+                            <span class="text-textPurple text-[11px] font-bold">Thank You</span>
                         </div>
-                        <span class="inline-block bg-cardPink text-textPurple text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-purple-200">✨ Thank You</span>
                     </div>
-                    <!-- ช่องที่ 3: Good Day -->
-                    <div onclick="openPortfolioDetail('ผลงานป้าย Good Day', 'https://placehold.co/320x320/fcf2f8/c084fc?text=Good+Day')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group p-2 text-center">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 rounded-xl relative mb-2">
-                            <img src="https://placehold.co/320x320/fcf2f8/c084fc?text=Good+Day" alt="Good Day" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+
+                    <!-- การ์ดที่ 3: Good Day -->
+                    <div onclick="openPortfolioDetail('ผลงานป้าย Good Day', 'https://placehold.co/320x320/fcf2f8/c084fc?text=Good+Day')" class="bg-white rounded-3xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group relative aspect-square">
+                        <img src="https://placehold.co/320x320/fcf2f8/c084fc?text=Good+Day" alt="Good Day" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-purple-100 flex items-center gap-1.5">
+                            <span class="text-accentPink text-xs">🌸</span>
+                            <span class="text-textPurple text-[11px] font-bold">Good Day</span>
                         </div>
-                        <span class="inline-block bg-cardPink text-textPurple text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-purple-200">❄️ Good Day</span>
                     </div>
-                    <!-- ช่องที่ 4: Bear Theme -->
-                    <div onclick="openPortfolioDetail('ผลงานป้าย Bear Theme', 'https://placehold.co/320x320/f3e8ff/c084fc?text=Bear+Theme')" class="bg-white rounded-2xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group p-2 text-center">
-                        <div class="aspect-square w-full overflow-hidden bg-purple-50 rounded-xl relative mb-2">
-                            <img src="https://placehold.co/320x320/f3e8ff/c084fc?text=Bear+Theme" alt="Bear Theme" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+
+                    <!-- การ์ดที่ 4: Bear Theme -->
+                    <div onclick="openPortfolioDetail('ผลงานป้าย Bear Theme', 'https://placehold.co/320x320/f3e8ff/c084fc?text=Bear+Theme')" class="bg-white rounded-3xl overflow-hidden border border-purple-100 cute-shadow cursor-pointer group relative aspect-square">
+                        <img src="https://placehold.co/320x320/f3e8ff/c084fc?text=Bear+Theme" alt="Bear Theme" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-purple-100 flex items-center gap-1.5">
+                            <span class="text-accentPink text-xs">🧸</span>
+                            <span class="text-textPurple text-[11px] font-bold">Bear Theme</span>
                         </div>
-                        <span class="inline-block bg-cardPink text-textPurple text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-purple-200">🧸 Bear Theme</span>
                     </div>
                 </div>
             </section>
