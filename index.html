@@ -64,11 +64,11 @@
 </head>
 <body id="home" class="bg-gradient-to-br from-pastelPink via-purple-50 to-pastelBlue min-h-screen flex justify-center items-center p-0 sm:p-6">
 
-    <!-- Welcome Overlay Popup (เปลี่ยนเป็นไอคอนรูปหมี/อุ้งเท้าหมีน่ารักๆ ตามสั่ง ไม่ใช่รูปภาพ) -->
+    <!-- Welcome Overlay Popup (เปลี่ยนเป็นไอคอนรูปหมีน่ารักๆ) -->
     <div id="welcomeOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-xs rounded-3xl p-6 cute-shadow text-center relative border-4 border-deepPink/50 animate-pulse-slow">
             <div class="w-16 h-16 bg-cardPink rounded-full flex items-center justify-center mx-auto mb-3 text-accentPink shadow-inner">
-                <i class="fa-solid fa-shield-cat text-3xl"></i>
+                <i class="fa-solid fa-teddy-bear text-3xl"></i>
             </div>
             <h3 class="font-bold text-lg text-textPurple mb-1">Welcome To Babybear World</h3>
             <p class="text-xs text-textPurple/80 mb-5">ยินดีต้อนรับสู่เว็บไซต์ของกิ้บค้าบ</p>
@@ -156,6 +156,49 @@
                     <a href="https://drive.google.com/drive/folders/102rWAqwvwmMH_avQ6nBT0Z6q--Fbbo-l" target="_blank" class="block bg-transparent p-0 border-none shadow-none hover:opacity-90 transition">
                         <img src="5a5a55d8af687fbafded3399b4fd6e79.jpeg" alt="Button 2" class="w-full h-auto block object-contain rounded-xl border-0 shadow-none bg-transparent">
                     </a>
+                </div>
+            </section>
+
+            <!-- Sign Price Rates Section (เพิ่มเรทราคางานของทางร้านไว้ข้างล่าง Details my studio ตามสั่ง) -->
+            <section id="pricing" class="px-5 mt-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-bold text-textPurple text-base flex items-center gap-2">
+                        <i data-lucide="tag" class="w-4 h-4 text-accentPink"></i> เรทราคางานของทางร้าน
+                    </h3>
+                </div>
+                <div class="bg-cardPink/50 p-4 rounded-3xl border border-purple-100 space-y-2.5">
+                    <p class="text-[11px] text-textPurple/80 text-center mb-2 font-medium">งานป้ายราคาจะต่างแต่ละแนวและ ราคาต่างกันตามเรทด้วยนะค้าบ ✨</p>
+                    
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวมืด</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวมีใจ</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวกระดาน</span>
+                        <span class="font-bold text-accentPink">Start 69฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวเจ้าหญิง</span>
+                        <span class="font-bold text-accentPink">Start 59฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวน่ารักปกติ</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวทางการ</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+                    <div class="bg-white px-4 py-2.5 rounded-xl flex justify-between items-center text-xs shadow-xs border border-purple-50">
+                        <span class="text-textPurple font-medium">แนวเกม</span>
+                        <span class="font-bold text-accentPink">Start 99฿+</span>
+                    </div>
+
+                    <p class="text-[11px] text-textPurple text-center pt-2 font-medium">นอกเหนือจากนี้สอบถามได้เลยนะคะ<br>พร้อมให้บริการทุกระดับประทับใจค่ะ 💖</p>
                 </div>
             </section>
 
@@ -292,11 +335,14 @@
                     <a href="#details" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="sparkles" class="w-4 h-4 text-accentPink"></i> Details My Studio
                     </a>
+                    <a href="#pricing" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
+                        <i data-lucide="tag" class="w-4 h-4 text-accentPink"></i> เรทราคางาน
+                    </a>
                     <a href="#portfolio" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="flower" class="w-4 h-4 text-accentPink"></i> ตัวอย่างผลงาน
                     </a>
                     <a href="#topup" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
-                        <i data-lucide="coins" class="w-4 h-4 text-accentPink"></i> เรทราคารับเติมเกม
+                        <i data-lucide="coins" class="w-4 h-4 text-accentPink"></i> เรทรับเติมเกม
                     </a>
                     <a href="#contact" onclick="toggleMenu()" class="flex items-center space-x-3 text-textPurple font-medium p-2 hover:bg-cardPink rounded-xl transition">
                         <i data-lucide="message-circle" class="w-4 h-4 text-accentPink"></i> ช่องทางการติดต่อ
